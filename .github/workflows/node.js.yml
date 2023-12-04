@@ -28,4 +28,8 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
-    - run: echo "${{secrets.PROD_ENV}}" > .env
+    - run: echo "${{ secrets.PROD_ENV }}" > dist/.env
+    - name: Install sshpass
+      run: sudo apt-get install -y sshpass
+    - name: Deploy to server
+      run: sshpass -p "${{ secrets.SERVER_PASSWORD }}" scp -r .env dist dp@api-consultas.prelmo.com:~/home/dp/projects/services
