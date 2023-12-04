@@ -34,5 +34,5 @@ jobs:
     - name: Deploy to server
       run: | 
         sshpass -v -p ${{ secrets.SERVER_PASSWORD }} scp -o StrictHostKeyChecking=no -r dist dp@api-consultas.prelmo.com:~/projects/services/data-wm
-        sshpass -v -p ${{ secrets.SERVER_PASSWORD }} scp -o StrictHostKeyChecking=no -r package.json dp@api-consultas.prelmo.com:~/projects/services/data-wm
-        ssh dp@api-consultas.prelmo.com "cd ~/projects/services/data-wm && npm i"
+    - name: Execute in server
+      run: sshpass -v -p ${{ secrets.SERVER_PASSWORD }} scp -o StrictHostKeyChecking=no -r package.json dp@api-consultas.prelmo.com:~/projects/services/data-wm
