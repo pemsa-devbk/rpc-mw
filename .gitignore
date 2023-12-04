@@ -38,4 +38,3 @@ lerna-debug.log*
 # other
 .env
 README2.md
-yarn.lock
