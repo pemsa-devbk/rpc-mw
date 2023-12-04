@@ -33,4 +33,4 @@ jobs:
       run: sudo apt-get install -y sshpass
     - name: Deploy to server
       run: | 
-        sshpass -v -p ${{ secrets.SERVER_PASSWORD }} scp -r dist dp@api-consultas.prelmo.com:~/projects/services
+        sshpass -v -p ${{ secrets.SERVER_PASSWORD }} scp -o StrictHostKeyChecking=no -r dist dp@api-consultas.prelmo.com:~/projects/services
