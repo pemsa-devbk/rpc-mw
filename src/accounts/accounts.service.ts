@@ -7,17 +7,12 @@ import { DbService } from '../db/db.service';
 
 @Injectable()
 export class AccountsService {
-    constructor(
-        private readonly dbService: DbService
-    ) { }
+    constructor(private readonly dbService: DbService) {}
 
     async getAccount(accountRequest: AccountRequest): Promise<AccountResponse> {
-        
         const { account, includeGeneralData, includeContacts, includeDeviceZone, includeEmail, includePanel, includePartitions, includeSecurity, includeUsers, includeZones, includeSchedule} = accountRequest;
         const dataAccount = await this.dbService.getAccounts([account.toString()], 0, includeGeneralData, includePanel, includeSecurity, includeEmail);                
-        
         if (dataAccount.length === 0) throw new RpcException('Cuenta no existente');
-
         const promises:[Promise<Partition[]>, Promise<Zone[]>, Promise<User[]>, Promise<Contact[]>, Promise<HorarioSend[]>] = [
             includePartitions ? this.dbService.getPartitions([account.toString()]) : null,
             includeZones ? this.dbService.getZones([account.toString()], includeDeviceZone) : null,

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package catalogue;
+
+message ResponseEvents {
+    repeated EventCAT events = 1;
+}
+
+message ResponseAlarms{
+    repeated AlarmCAT alarms = 1;
+}
+
+
+message EventCAT{
+    string CodigoEvento = 1;
+    string DescripcionEvent = 2;
+    string CodigoAlarma = 3;
+}
+message AlarmCAT{
+    string CodigoAlarma = 1;
+    string DescripcionAlarm = 2;
+}

@@ -1,6 +1,7 @@
 import "./accounts/proto/accounts.proto";
 import "./groups/proto/groups.proto";
 import "./events/proto/events.proto";
+import "./catalogue/proto/catalogue.proto";
 
 
 syntax = "proto3";
@@ -21,6 +22,9 @@ service DbService {
     // For groups
     rpc SearchGroups (SearchRequestGroup) returns (ResponseGroups);
     rpc FindOneGroup (GroupRequestFilter) returns (Group);
+    // For events y alarms (Catalogue)
+    rpc GetCatalogueAlarms (EmptyRequest) returns (ResponseAlarms);
+    rpc GetCatalogueEvents (EmptyRequest) returns (ResponseEvents);
     // TEST
     rpc Test(EmptyRequest) returns (ResponseTest);
 }

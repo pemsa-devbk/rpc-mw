@@ -3,10 +3,9 @@ import { GrpcMethod, RpcException } from '@nestjs/microservices';
 import { AccountsService } from './accounts.service';
 import { AccountRequest, SearchAccountsRequest } from './interfaces';
 
-
 @Controller('accounts')
 export class AccountsController {
-  constructor(private readonly accountsService: AccountsService) { }
+  constructor(private readonly accountsService: AccountsService) {}
 
   @GrpcMethod('DbService')
   async findOneAccount(data: AccountRequest) {
@@ -18,12 +17,10 @@ export class AccountsController {
 
   @GrpcMethod('DbService')
   async searchAccounts(data: SearchAccountsRequest) {
-    
     const response = await this.accountsService.searchAccounts(data);
     return {
-      accounts: response
+      accounts: response,
     };
-
   }
 
 }

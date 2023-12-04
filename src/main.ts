@@ -27,11 +27,10 @@ async function bootstrap() {
         package: 'db',
         protoPath: join(__dirname, './main.proto'),
         credentials,
-        maxSendMessageLength: 1024 * 1024 * 10
+        maxSendMessageLength: 1024 * 1024 * 20
       },
     }
   );
   await app.listen();
-  console.log('Service start');
 }
 bootstrap();

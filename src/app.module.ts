@@ -6,6 +6,7 @@ import { CommonModule } from './common/common.module';
 import { GroupsModule } from './groups/groups.module';
 import { EventsModule } from './events/events.module';
 import { ConfigModule } from '@nestjs/config';
+import { CatalogueModule } from './catalogue/catalogue.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { ConfigModule } from '@nestjs/config';
     AccountsModule, 
     CommonModule, 
     GroupsModule, 
-    EventsModule
+    EventsModule, 
+    CatalogueModule
   ],
   controllers: [AppController],
   providers: [],

@@ -1,10 +1,12 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { Char, ConnectionPool, IResult } from 'mssql';
+import { ConnectionPool, IResult } from 'mssql';
 import { deleteSpace, spacesForElement } from './helpers/spaces';
 import { Account, Comment, CommentSend, Contact, EventTop, FilterRequest, Group, Horario, HorarioSend, Partition, User, Zone } from './interfaces';
 import { RpcException } from '@nestjs/microservices';
 import { Event } from '../common/interfaces';
 import { ConfigService } from '@nestjs/config';
+import { AlarmCAT } from '../catalogue/interfaces/alarms-send.interface';
+import { EventoCAT } from '../catalogue/interfaces/evento-send.interface';
 
 
 export interface AccountQuery {
@@ -296,6 +298,27 @@ export class DbService implements OnModuleInit {
     }
 
 
+    // * Consulta de catalogos
+    async getAlarmsCAT(){
+        try {
+            const { recordset }: IResult<AlarmCAT> = await this.pool.request()
+                .query("SELECT CodigoAlarma, DescripcionAlarm FROM Alarma where Estado = 'A'")
+            return deleteSpace(recordset);
+
+        } catch (error) {
+            throw new RpcException(`ERROR AL CONSULTAR EL CATALOGO DE ALARMAS`);
+        }
+    }
+    async getEventsCAT(){
+        try {
+            const { recordset }: IResult<EventoCAT> = await this.pool.request()
+                .query("SELECT  CodigoEvento, DescripcionEvent, CodigoAlarma FROM EventosCat where Estado = 'A'")
+            return deleteSpace(recordset);
+
+        } catch (error) {
+            throw new RpcException(`ERROR AL CONSULTAR EL CATALOGO DE EVENTOS`);
+        }
+    }
 
     // * Consulta de tablas
     async existTable(table: string) {
