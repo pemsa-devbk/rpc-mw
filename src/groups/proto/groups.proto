@@ -1,0 +1,58 @@
+import "../../accounts/proto/accounts.proto";
+syntax = "proto3";
+
+package groups;
+
+enum TypeGroup {
+    Grupo = 2;
+    Dealer = 3;
+}
+
+
+message GroupRequestFilter{
+    GroupRequest group = 1;
+    bool includeAccounts = 2;
+    bool includeZones = 3;
+    bool includePartitions = 4;
+    bool includeUsers = 5;
+    bool includeContacts = 6;
+    bool includePanel = 7;
+    bool includeSecurity = 8;
+    bool includeGeneralData = 9;
+    bool includeDeviceZone = 10;
+    bool includeEmail = 11;
+    bool includeSchedule = 12;
+    StateAccount state = 13;
+}
+
+message SearchRequestGroup{
+    repeated GroupRequest groups = 1;
+    bool includeAccounts = 2;
+    bool includeZones = 3;
+    bool includePartitions = 4;
+    bool includeUsers = 5;
+    bool includeContacts = 6;
+    bool includePanel = 7;
+    bool includeSecurity = 8;
+    bool includeGeneralData = 9;
+    bool includeDeviceZone = 10;
+    bool includeEmail = 11;
+    bool includeSchedule = 12;
+    StateAccount state = 13;
+}
+
+message GroupRequest{
+    int32 id = 1;
+    TypeGroup type = 2;
+}
+
+message Group {
+    int32 Codigo = 1;
+    string Nombre = 2;
+    int32 Tipo = 3;
+    repeated Account accounts = 4; 
+}
+
+message ResponseGroups{
+    repeated Group groups = 1;
+}

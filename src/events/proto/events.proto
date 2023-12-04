@@ -1,0 +1,200 @@
+import "../../accounts/proto/accounts.proto";
+import "../../groups/proto/groups.proto";
+
+syntax = "proto3";
+
+package events;
+
+
+// For all 
+enum TypeCode {
+    Evento = 2;
+    Alarma = 1;
+}
+enum Order {
+    ASC = 1;
+    DESC = 2;
+}
+message FilterEvents {
+    string code = 1;
+    TypeCode type = 2;
+}
+
+
+
+// For request ***********************
+message EventsGrouprequest {
+    repeated GroupRequest groups = 1;
+    StateAccount state = 2;
+    string dateStart = 3;
+    string dateEnd = 4;
+    string startQuery = 5;
+    string endQuery = 6;
+    bool filterIsExclude = 7;
+    bool includeScheduled = 8;
+    bool includeComments = 9;
+    bool separatePartitions = 10;
+    repeated FilterEvents filters = 11;
+    Order order = 12; 
+}
+message EventsRequest {
+    repeated int32 accounts = 1;
+    StateAccount state = 2;
+    string dateStart = 3;
+    string dateEnd = 4;
+    string startQuery = 5;
+    string endQuery = 6;
+    bool filterIsExclude = 7;
+    bool includeScheduled = 8;
+    bool includeComments = 9;
+    bool separatePartitions = 10;
+    repeated FilterEvents filters = 11;
+    Order order = 12; 
+}
+message LastEventGroupRequest {
+    repeated GroupRequest groups = 1;
+    StateAccount state = 2;
+    bool filterIsExclude = 3;
+    bool separatePartitions = 4;
+    repeated FilterEvents filters = 5;
+    string dateStart = 6;
+    string dateEnd = 7;
+    string startQuery = 8;
+    string endQuery = 9;
+}
+message LastEventRequest {
+    repeated int32 accounts = 1;
+    StateAccount state = 2;
+    bool filterIsExclude = 3;
+    bool separatePartitions = 4;
+    repeated FilterEvents filters = 5;
+    string dateStart = 6;
+    string dateEnd = 7;
+    string startQuery = 8;
+    string endQuery = 9;
+}
+message EventsWOAccountRequest {
+    string dateStart = 1;
+    string dateEnd = 2;
+    string startQuery = 3;
+    string endQuery = 4;
+    bool filterIsExclude = 5;
+    repeated FilterEvents filters = 6;
+    Order order = 7; 
+}
+
+
+
+
+
+
+// For Response 
+message GroupsEventsResponse {
+    repeated GroupEventsResponse data = 1;
+}
+message AccountsEventResponse {
+    repeated AccountEventResponse data = 1;
+}
+message EventWOAccountResponse {
+    repeated EventResponse data = 1;
+}
+message GroupsLastEventResponse {
+    repeated GroupLastEventResponse data = 1;
+}
+message GroupLastEventResponse{
+    int32 Codigo = 1;
+    string Nombre = 2;
+    int32 Tipo = 3;
+    repeated AccountLastEventResponse cuentas = 4;
+}
+
+
+// Singles response
+message GroupEventsResponse{
+    int32 Codigo = 1;
+    string Nombre = 2;
+    int32 Tipo = 3;
+    repeated AccountEventResponse cuentas = 4;
+}
+message AccountEventResponse {
+    string Nombre = 1;
+    string Direccion = 2; 
+    string CodigoCte = 3;
+    string CodigoAbonado = 4; 
+    repeated EventoResponse eventos = 5;
+    repeated CommentResponse comentarios = 6;
+    Schedule horario = 7;
+}
+message AccountsLastEventResponse {
+    repeated AccountLastEventResponse data = 1;
+}
+message AccountLastEventResponse {
+    string Nombre = 1;
+    string Direccion = 2; 
+    string CodigoCte = 3;
+    string CodigoAbonado = 4; 
+    LastEventoResponse evento = 5;
+}
+message EventResponse{
+    string CodigoCte = 1;
+    string FechaOriginal = 2;
+    string Hora = 3;
+    string CodigoEvento = 4;
+    string CodigoAlarma = 5;
+    string DescripcionAlarm = 6;
+    string CodigoZona = 7;
+    string DescripcionZona = 8;
+    string CodigoUsuario = 9;
+    string NombreUsuario = 10;
+    string DescripcionEvent = 11;
+    sint32 Particion = 12; // Negativo si la particion no existe
+    string ClaveMonitorista = 13;
+    string NomCalifEvento = 14;
+    string FechaPrimeraToma = 15;
+    string HoraPrimeraToma = 16;
+    string FechaFinalizo = 17;
+    string HoraFinalizo = 18;
+}
+
+// Response for event
+message EventoResponse{
+    string FechaOriginal = 1;
+    string Hora = 2;
+    string CodigoEvento = 3;
+    string CodigoAlarma = 4;
+    string DescripcionAlarm = 5;
+    string CodigoZona = 6;
+    string DescripcionZona = 7;
+    string CodigoUsuario = 8;
+    string NombreUsuario = 9;
+    string DescripcionEvent = 10;
+    sint32 Particion = 11; // Negativo si la particion no existe
+    string ClaveMonitorista = 12;
+    string NomCalifEvento = 13;
+    string FechaPrimeraToma = 14;
+    string HoraPrimeraToma = 15;
+    string FechaFinalizo = 16;
+    string HoraFinalizo = 17;
+}
+message LastEventoResponse{
+    string FechaOriginal = 1;
+    string Hora = 2;
+    string CodigoEvento = 3;
+    string CodigoAlarma = 4;
+    string DescripcionAlarm = 5;
+    string CodigoZona = 6;
+    string DescripcionZona = 7;
+    string CodigoUsuario = 8;
+    string NombreUsuario = 9;
+    string DescripcionEvent = 10;
+    sint32 Particion = 11; // Negativo si la particion no existe
+}
+message CommentResponse {
+    string FechaEvento = 1;
+    string HoraEvento = 2;
+    string FechaLlamada = 3;
+    string HoraLlamada = 4;
+    string TelefonoAl = 5;
+    string Contacto = 6;
+    string Comentario = 7;
+}
