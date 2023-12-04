@@ -32,4 +32,5 @@ jobs:
     - name: Install sshpass
       run: sudo apt-get install -y sshpass
     - name: Deploy to server
-      run: sshpass -p ${{ secrets.SERVER_PASSWORD }} scp -r dist dp@api-consultas.prelmo.com:~/projects/services
+      run: | 
+        sshpass -v -p ${{ secrets.SERVER_PASSWORD }} scp -r dist dp@api-consultas.prelmo.com:~/projects/services
