@@ -33,7 +33,7 @@ jobs:
       run: sudo apt-get install -y sshpass
     - name: Deploy to server
       run: | 
-        sshpass -v -p ${{ secrets.SERVER_PASSWORD }} scp -o StrictHostKeyChecking=no -r dist dp@api-consultas.prelmo.com:~/projects/services/data-wm
-        sshpass -v -p ${{ secrets.SERVER_PASSWORD }} scp -o StrictHostKeyChecking=no -r package.json dp@api-consultas.prelmo.com:~/projects/services/data-wm
+        sshpass -p ${{ secrets.SERVER_PASSWORD }} scp -o StrictHostKeyChecking=no -r dist dp@api-consultas.prelmo.com:~/projects/services/data-wm
+        sshpass -p ${{ secrets.SERVER_PASSWORD }} scp -o StrictHostKeyChecking=no -r package.json dp@api-consultas.prelmo.com:~/projects/services/data-wm
     - name: Execute in server
-      run: sshpass -p ${{ secrets.SERVER_PASSWORD }} dp@api-consultas.prelmo.com "cd ~/projects/services/data-wm && npm i"
+      run: sshpass -v -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no dp@api-consultas.prelmo.com "cd ~/projects/services/data-wm && npm i"
