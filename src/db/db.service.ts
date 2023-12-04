@@ -21,7 +21,7 @@ export class DbService implements OnModuleInit {
     ) {
         this.pool = new ConnectionPool({
             user: this.configService.get<string>('DATABASE_USER') || '' ,
-            password: this.configService.get<string>('DATABASE_PASSWORD') || 'siatecMexico2014=)(',
+            password: this.configService.get<string>('DATABASE_PASSWORD') || '',
             server: this.configService.get<string>('SERVER') || 'localhost', // You can use 'localhost\\instance' to connect to named instance
             database: this.configService.get<string>('DATABASE') || '',
             options: {
