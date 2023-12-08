@@ -25,8 +25,7 @@ jobs:
         password: ${{ secrets.TOKEN_DEPLOY }}
 
       - name: Build the image 
-      run: |
-        docker build . --tag ghcr.io/PEMSAEduardo/rpc-mw:latest
-        docker push ghcr.io/PEMSAEduardo/rpc-mw:latest
+        run: |
+          docker build . --tag ghcr.io/PEMSAEduardo/rpc-mw:latest
+          docker push ghcr.io/PEMSAEduardo/rpc-mw:latest
         
-  
