@@ -23,8 +23,9 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.TOKEN_DEPLOY }}
     - name: Build the image 
+      context: .
       run: | 
-        docker build -t ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest .
+        docker build . --file Dockerfile -t ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest .
 
         
         
