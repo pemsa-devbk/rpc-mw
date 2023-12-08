@@ -24,7 +24,7 @@ jobs:
         password: ${{ secrets.TOKEN_DEPLOY }}
     - name: Build the image 
       run: | 
-        docker build -t ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest
+        docker build -t ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest .
 
         
         
