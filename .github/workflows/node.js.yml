@@ -23,7 +23,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.TOKEN_DEPLOY }}
     - name: Build the image 
-      run: |
-        docker build . --tag ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest
-        docker push ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest
+      run: docker build . --tag ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest
+        
         
