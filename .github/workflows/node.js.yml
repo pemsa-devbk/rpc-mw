@@ -10,30 +10,23 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
 
+  create-docker-image:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [ 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      - name: Checkout the code
+      - uses: actions/setup-node@v3
+
+      - name: Login to GitHub Container Registry
+      - uses: docker/login-action@v1
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: echo "${{ secrets.PROD_ENV }}" > dist/.env
-    - name: Install sshpass
-      run: sudo apt-get install -y sshpass
-    - name: Deploy to server
-      run: | 
-        sshpass -p ${{ secrets.SERVER_PASSWORD }} scp -o StrictHostKeyChecking=no -r dist dp@api-consultas.prelmo.com:~/projects/services/data-wm
-        sshpass -p ${{ secrets.SERVER_PASSWORD }} scp -o StrictHostKeyChecking=no -r package.json dp@api-consultas.prelmo.com:~/projects/services/data-wm
-    - name: Execute in server
-      run: sshpass -v -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no dp@api-consultas.prelmo.com "cd ~/projects/services/data-wm && npm ci"
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.TOKEN_DEPLOY }}
+
+      - name: Build the image 
+      run: |
+        docker build . --tag ghcr.io/PEMSAEduardo/rpc-mw:latest
+        docker push ghcr.io/PEMSAEduardo/rpc-mw:latest
+        
+  
