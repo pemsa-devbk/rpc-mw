@@ -22,7 +22,7 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.TOKEN_DEPLOY }}
-    - name: Build the image 
-      run: docker build . --file Dockerfile --tag rpc-mw:$(date +%s)
+#    - name: Build the image 
+#      run: docker build . --file Dockerfile --tag rpc-mw:$(date +%s)
         
         
