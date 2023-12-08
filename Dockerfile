@@ -1,15 +1,3 @@
-## Etapa 1 instalacion 
-FROM node:alpine as dev
-WORKDIR /app
-# Copiar los archivos de configuración
-COPY package.json pnpm-lock.yaml ./
-# Instalar dependencias (todas)
-RUN npm install -g pnpm
-RUN pnpm install
-# Copiar codigo fuente
-#COPY . .
-RUN pnpm run start:dev
-
 
 
 # Etapa 2. Dependencias de desarrollo
