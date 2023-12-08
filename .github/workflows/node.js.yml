@@ -25,6 +25,7 @@ jobs:
     - name: Build the image 
       run: | 
         docker build . --tag ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest
+        docker push ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest
 
         
         
