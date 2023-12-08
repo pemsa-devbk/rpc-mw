@@ -1,15 +1,5 @@
 
-# Versioning and metadata
-.git
-.gitignore
-.dockerignore
-
-# Build dependencies
-dist
 node_modules
-coverage
-
-
-# Dockerfile
-README.md
-tslint.json
+.git
+.github
+dist
