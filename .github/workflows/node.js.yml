@@ -49,7 +49,3 @@ deploy:
             --env-file .env \ 
             ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest 
           EOF
-
-
-        
-        
