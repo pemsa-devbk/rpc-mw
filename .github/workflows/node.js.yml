@@ -38,7 +38,6 @@ jobs:
           sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p 3000 << EOF cd dp/pemsa/back/service_9000_datamw/
           docker login ghcr.io -u pemsa-devbk -p ${{ secrets.TOKEN_DEPLOY }}
           docker pull ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest
-          docker container stop service_mw && docker container rm service_mw
           docker run -d \
             --name service_mw \
             -p 3000:9000 \
