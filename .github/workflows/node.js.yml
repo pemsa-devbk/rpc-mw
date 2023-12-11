@@ -12,7 +12,7 @@ on:
 jobs:
 
   deploy:
-    needs: create-docker-image
+   
     runs-on: ubuntu-latest
     steps: 
       - name: install sshpass
