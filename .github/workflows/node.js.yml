@@ -27,7 +27,7 @@ jobs:
         docker push ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest
 
   deploy:
-   
+    needs: create-docker-image
     runs-on: ubuntu-latest
     steps: 
       - name: install sshpass
