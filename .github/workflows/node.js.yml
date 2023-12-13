@@ -43,7 +43,7 @@ jobs:
               --name service_mw \
               --network rpc_mw \
               --restart always \
-              -v $(pwd)/certs:/app/dist/certs \
+              -v /home/server_admin/dp/pemsa/back/service_9000_datamw/certs:/app/dist/certs \
               -e DATABASE_USER=${{ secrets.DATABASE_USER }} \
               -e DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }} \
               -e SERVER=${{ secrets.SERVER_DB }} \
