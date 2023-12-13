@@ -19,13 +19,18 @@ jobs:
         run: sudo apt-get install -y sshpass
       - name: SSH into server
         run: |
-          sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p 3000 <<EOF 
+          sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p 3000 <<EOF cd /home/server_admin/dp/pemsa/back/service_9000_datamw/
+            touch example.txt
             docker login ghcr.io -u pemsa-devbk -p ${{ secrets.TOKEN_DEPLOY }}
             docker pull ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest
             docker stop service_mw && docker rm service_mw
             docker run -d \
               --name service_mw \
-              -p 3000:9000 \
+              -p 9000:3000 \
               --restart always \
+              -e DATABASE_USER=${{ secrets.DATABASE_USER }} \
+              -e DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }} \
+              -e SERVER=${{ secrets.SERVER_DB }} \
+              -e DATABASE=${{ secrets.DATABASE }} \
               ghcr.io/pemsa-devbk/rpc-mw/rpc-mw:latest 
           EOF
